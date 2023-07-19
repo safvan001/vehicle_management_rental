@@ -1,0 +1,14 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+  <h1>Vehicle List</h1>
+  {% if vehicles %}
+    <ul>
+      {% for vehicle in vehicles %}
+        <li>{{ vehicle.vehicle_number }} - {{ vehicle.vehicle_type }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No vehicles found.</p>
+  {% endif %}
+{% endblock %}

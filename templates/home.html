@@ -1,0 +1,17 @@
+
+
+
+{% extends 'base2.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container_fluid mx-5 my-5 text-center" style="bottom:30px;">
+<center>
+hello
+<h5><a class="btn btn-danger" aria-current="page" href="{% url 'user_access:login' %}" style="width: 150px;">LOGIN</a></h5>
+<h5><a class="btn btn-danger" aria-current="page" href="{% url 'user_access:usersignup' %}" style="width: 150px;">user signup</a></h5>
+<h5><a class="btn btn-danger" aria-current="page" href="{% url 'user_access:adminsignup' %}" style="width: 150px;">Admin signup</a></h5>
+<h5><a class="btn btn-danger" aria-current="page" href="{% url 'user_access:superadminsign' %}" style="width: 150px;">SuperUser signup</a></h5>
+        </center>
+</div>
+{% endblock %}
