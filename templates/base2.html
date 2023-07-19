@@ -19,17 +19,18 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto  ">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'user_access:login' %}">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Categories</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
+
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_access:logout' %}">logout</a>
+          </li>
+        {% else %}
+           <li class="nav-item">
+             <a class="nav-link" href="#">about</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </div>

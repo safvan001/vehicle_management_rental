@@ -1,12 +1,12 @@
 {% extends 'base2.html' %}
 
 {% block content %}
-  <h1>Vehicle List For Super Admin</h1>
+  <h1>Vehicle List For User</h1>
   {% if vehicles %}
     <ul>
       {% for vehicle in vehicles %}
         <li>{{ vehicle.vehicle_number }} - {{ vehicle.vehicle_type }}
-             <a href="{% url 'user_access:delete' vehicle.pk %}">delete</a>
+             <a href="{% url 'user_access:detail' vehicle.pk %}">view</a>
         </li>
 
       {% endfor %}
