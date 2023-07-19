@@ -4,7 +4,7 @@ from django.views import View
 from .forms import CustomUserCreationForm
 
 
-from user_access.models import User1,Vehicle
+from user_access.models import User1,Vehicle,UserAccess
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
@@ -50,7 +50,12 @@ class VehicleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     permission_denied_message = 'Unauthorized Access'
 
     def test_func(self):
-        return self.request.user.user_type in ['Super admin', 'Admin']
+        return self.request.user.user_type in ['Super admin']
+    def form_valid(self, form):
+        # Set the current user as the owner of the vehicle being created
+        form.instance.vehicle = self.request.user
+        return super().form_valid(form)
+
 
 # view to update vehicle
 class VehicleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -64,6 +69,10 @@ class VehicleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         return self.request.user.user_type in ['Super admin', 'Admin']
 
+    def form_valid(self, form):
+        # Set the current user as the owner of the vehicle being created
+        form.instance.vehicle = self.request.user
+        return super().form_valid(form)
     def get_success_url(self):
         return reverse_lazy('user_access:detail', kwargs={'pk': self.object.pk})
 
@@ -77,6 +86,10 @@ class VehicleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.user_type == 'Super admin'
+    def form_valid(self, form):
+        # Set the current user as the owner of the vehicle being created
+        form.instance.vehicle = self.request.user
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('user_access:detail', kwargs={'pk': self.object.pk})

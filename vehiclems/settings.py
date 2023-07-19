@@ -74,7 +74,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'vehiclems.wsgi.application'
 
 AUTH_USER_MODEL = 'user_access.User1'
-LOGIN_URL='user_acess:userlogin'
+LOGIN_URL='user_acess:login'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
